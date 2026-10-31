@@ -223,7 +223,7 @@ Copy and paste these templates when creating new entries in the vault.
 
 *Destination:* `projects/proposals/<kebab-slug>.md`
 
-```markdown
+````markdown
 ---
 title: "RFC: Project Name"
 date: YYYY-MM-DD
@@ -272,7 +272,7 @@ Describe the components, architecture, and interaction flow:
 ## 7. Open Questions & Risks
 - [ ] Question 1: Unresolved risk or unknown dependency.
 - [ ] Question 2: Performance under high concurrency.
-```
+````
 
 <a id="template-2-quick-thought--brainstorm"></a>
 ### Template 2: Quick Thought / Brainstorm
