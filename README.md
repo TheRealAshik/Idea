@@ -29,6 +29,17 @@
 - [🏷️ Tagging & Metadata Rules](#tagging--metadata-rules)
   - [Frontmatter Specification](#frontmatter-specification)
   - [Status Vocabulary](#status-vocabulary)
+- [🌱 Idea Lifecycle Workflow](#idea-lifecycle-workflow)
+  - [Stage 1: Seed (Inception)](#stage-1-seed-inception)
+  - [Stage 2: Sprout (Exploration & Spike)](#stage-2-sprout-exploration--spike)
+  - [Stage 3: Sapling (RFC & Architecture)](#stage-3-sapling-rfc--architecture)
+  - [Stage 4: Tree (Execution & Shipping)](#stage-4-tree-execution--shipping)
+  - [Stage 5: Evergreen / Compost (Archive & Post-Mortem)](#stage-5-evergreen--compost-archive--post-mortem)
+- [📝 Ready-to-Use Note Templates](#ready-to-use-note-templates)
+  - [Template 1: Project Idea RFC](#template-1-project-idea-rfc)
+  - [Template 2: Quick Thought / Brainstorm](#template-2-quick-thought--brainstorm)
+  - [Template 3: Architectural Decision Record (ADR)](#template-3-architectural-decision-record-adr)
+  - [Template 4: Execution Plan & Checklist](#template-4-execution-plan--checklist)
 
 ---
 
@@ -143,3 +154,239 @@ owner: "@octo-user"
 - `completed`: Implementation shipped and verified.
 - `rejected`: Decided against with documented rationale.
 - `archived`: Historical reference; no longer actively maintained.
+
+---
+
+<a id="idea-lifecycle-workflow"></a>
+## 🌱 Idea Lifecycle Workflow
+
+Ideas in this repository transition through a progressive botanical lifecycle, minimizing noise while fostering high-leverage outcomes:
+
+```text
+  ┌──────────────┐      ┌──────────────┐      ┌──────────────┐      ┌──────────────┐
+  │ 🌱 Seed      │ ───► │ 🌿 Sprout    │ ───► │ 🌳 Sapling   │ ───► │ 🌲 Tree      │
+  │ (Inception)  │      │ (Exploration)│      │ (Proposal)   │      │ (Execution)  │
+  └──────────────┘      └──────────────┘      └──────────────┘      └──────────────┘
+    thoughts/             dev-ideas/            projects/             projects/active/
+                                                proposals/            & plans/
+```
+
+<a id="stage-1-seed-inception"></a>
+### Stage 1: Seed (Inception)
+- **Location:** `thoughts/YYYY-MM-DD-<slug>.md`
+- **Status:** `draft`
+- **Activity:** Capture without friction. Unfiltered ideas, interesting blog posts, shower thoughts, and problem statements.
+- **Exit Criteria:** Does this solve a real problem or present a compelling technical curiosity? If yes, upgrade to **Sprout**.
+
+<a id="stage-2-sprout-exploration--spike"></a>
+### Stage 2: Sprout (Exploration & Spike)
+- **Location:** `dev-ideas/<slug>.md`
+- **Status:** `draft` / `in-review`
+- **Activity:** Conduct quick proof-of-concept (POC) scripts, evaluate alternative tools, determine technical viability, and list pros and cons.
+- **Exit Criteria:** Technical feasibility demonstrated and scope warrants formal commitment. Upgrade to **Sapling**.
+
+<a id="stage-3-sapling-rfc--architecture"></a>
+### Stage 3: Sapling (RFC & Architecture)
+- **Location:** `projects/proposals/<slug>.md` and `decisions/NNNN-<slug>.md`
+- **Status:** `in-review` ➔ `accepted`
+- **Activity:** Formulate a full specification covering requirements, system diagrams, data schemas, security implications, and milestones.
+- **Exit Criteria:** Proposal is complete, risks are addressed, and implementation is greenlit. Move file to `projects/active/`.
+
+<a id="stage-4-tree-execution--shipping"></a>
+### Stage 4: Tree (Execution & Shipping)
+- **Location:** `projects/active/<slug>.md` and `plans/<year>-q<quarter>-<slug>.md`
+- **Status:** `in-progress` ➔ `completed`
+- **Activity:** Code implementation, sprint tracking, release checklist sign-off, and deployment verification.
+- **Exit Criteria:** All acceptance criteria fulfilled and merged to production.
+
+<a id="stage-5-evergreen--compost-archive--post-mortem"></a>
+### Stage 5: Evergreen / Compost (Archive & Post-Mortem)
+- **Location:** `projects/archive/<slug>.md`
+- **Status:** `completed` or `archived` / `rejected`
+- **Activity:** Log lessons learned, retro observations, and maintain historical reference.
+
+---
+
+<a id="ready-to-use-note-templates"></a>
+## 📝 Ready-to-Use Note Templates
+
+Copy and paste these templates when creating new entries in the vault.
+
+<a id="template-1-project-idea-rfc"></a>
+### Template 1: Project Idea RFC
+
+*Destination:* `projects/proposals/<kebab-slug>.md`
+
+```markdown
+---
+title: "RFC: Project Name"
+date: YYYY-MM-DD
+status: draft # [draft | in-review | accepted | rejected]
+tags:
+  - rfc
+  - proposal
+  - architecture
+owner: "@your-handle"
+---
+
+# 💡 RFC: Project Name
+
+## 1. Summary & Problem Statement
+Concise 2-3 sentence overview of what problem this solves and why it matters.
+
+## 2. Motivation & Goals
+- **Goal 1:** Primary objective.
+- **Goal 2:** Secondary objective.
+- **Non-Goals:** What we are explicitly NOT solving in this iteration.
+
+## 3. High-Level Architecture & User Flow
+Describe the components, architecture, and interaction flow:
+
+```text
+[Client/CLI] ─── HTTP/JSON ───► [API Gateway] ───► [Core Engine] ───► [Storage]
+```
+
+## 4. Technical Specifications
+- **Language & Runtime:** e.g., TypeScript / Node.js 22 LTS or Rust.
+- **Persistence:** SQLite / Postgres / Redis.
+- **External Integrations:** APIs, third-party libraries.
+
+## 5. Alternatives Considered
+| Solution | Pros | Cons | Verdict |
+| :--- | :--- | :--- | :--- |
+| Proposed Solution | High throughput, type safe | Steeper initial setup | Recommended |
+| Alternative A | Simpler prototype | Hard to scale | Rejected |
+
+## 6. Implementation Milestones
+- [ ] Phase 1: Prototype and schema design
+- [ ] Phase 2: Core business logic and test suite
+- [ ] Phase 3: CLI / UI surface and documentation
+- [ ] Phase 4: Production release and benchmark verification
+
+## 7. Open Questions & Risks
+- [ ] Question 1: Unresolved risk or unknown dependency.
+- [ ] Question 2: Performance under high concurrency.
+```
+
+<a id="template-2-quick-thought--brainstorm"></a>
+### Template 2: Quick Thought / Brainstorm
+
+*Destination:* `thoughts/YYYY-MM-DD-<kebab-slug>.md`
+
+```markdown
+---
+title: "Thought: Short Catchy Name"
+date: YYYY-MM-DD
+status: draft
+tags:
+  - spark
+  - reading-note
+  - dev-habit
+owner: "@your-handle"
+---
+
+# 💭 Thought: Short Catchy Name
+
+## Context / Spark
+What prompted this thought? (e.g., reading an article, debugging a tricky bug, watching a keynote).
+
+## The Idea
+Explain the concept in raw, unstructured prose or bullet points.
+- Key observation:
+- Potential utility:
+- Interesting twist:
+
+## Quick Pros & Cons
+- **Pros:** Fast, high leverage, elegant.
+- **Cons:** Additional moving part, unproven.
+
+## Next Actions
+- [ ] Research existing open-source libraries solving this.
+- [ ] Convert into a `dev-ideas/` spike if viable.
+```
+
+<a id="template-3-architectural-decision-record-adr"></a>
+### Template 3: Architectural Decision Record (ADR)
+
+*Destination:* `decisions/NNNN-<kebab-slug>.md`
+
+```markdown
+---
+title: "ADR NNNN: Decision Title"
+date: YYYY-MM-DD
+status: accepted # [draft | in-review | accepted | superseded | rejected]
+tags:
+  - adr
+  - architecture
+  - decisions
+owner: "@your-handle"
+---
+
+# ADR NNNN: Decision Title
+
+## Status
+Accepted (YYYY-MM-DD)
+
+## Context
+What technical challenge or trade-off requires a concrete decision? Outline constraints, requirements, and operational environment.
+
+## Decision
+We will adopt `<Technology / Pattern / Approach>` because `<rationale>`.
+
+## Consequences
+### Positive
+- Significant latency reduction across read operations.
+- Type-safe query contracts between frontend and backend.
+
+### Negative / Risks
+- Adds an operational dependency that requires automated backups.
+- Team requires ramp-up time on query mechanics.
+
+## Alternatives Considered
+- **Alternative 1:** Why it was discarded.
+- **Alternative 2:** Why it was discarded.
+```
+
+<a id="template-4-execution-plan--checklist"></a>
+### Template 4: Execution Plan & Checklist
+
+*Destination:* `plans/YYYY-q<Q>-<kebab-slug>.md`
+
+```markdown
+---
+title: "Plan: Project Sprint / Rollout Plan"
+date: YYYY-MM-DD
+status: in-progress # [draft | in-progress | completed | blocked]
+tags:
+  - roadmap
+  - execution
+  - plan
+owner: "@your-handle"
+---
+
+# 📋 Plan: Project Sprint / Rollout Plan
+
+## Scope & Target Date
+- **Target Date:** YYYY-MM-DD
+- **Primary Spec:** `projects/active/<spec-name>.md`
+
+## Execution Checklist
+
+### Phase 1: Preparation & Scaffolding
+- [ ] Initialize repository structure and configuration files
+- [ ] Configure CI pipelines with linter, test runner, and type check
+- [ ] Define initial database migrations and seed fixtures
+
+### Phase 2: Core Engineering
+- [ ] Implement data models and validation schemas
+- [ ] Construct business logic services
+- [ ] Add unit tests (coverage > 80%)
+
+### Phase 3: Polish & Release
+- [ ] End-to-end integration testing
+- [ ] Write documentation and quickstart instructions
+- [ ] Ship v1.0.0 tag
+
+## Blockers & Daily Log
+- **YYYY-MM-DD:** Kickoff complete. Environment established.
+```
