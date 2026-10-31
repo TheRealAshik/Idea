@@ -40,6 +40,12 @@
   - [Template 2: Quick Thought / Brainstorm](#template-2-quick-thought--brainstorm)
   - [Template 3: Architectural Decision Record (ADR)](#template-3-architectural-decision-record-adr)
   - [Template 4: Execution Plan & Checklist](#template-4-execution-plan--checklist)
+- [🚀 Demo Plan: Idea to Production](#demo-plan-idea-to-production)
+  - [The Concept: LogPulse Telemetry Daemon](#the-concept-logpulse-telemetry-daemon)
+  - [Step-by-Step Vault Walkthrough](#step-by-step-vault-walkthrough)
+  - [Sample Execution Milestone Checklist](#sample-execution-milestone-checklist)
+- [🔮 Next Steps & Future Enhancements](#next-steps--future-enhancements)
+- [💡 Repository Hygiene & Best Practices](#repository-hygiene--best-practices)
 
 ---
 
@@ -390,3 +396,111 @@ owner: "@your-handle"
 ## Blockers & Daily Log
 - **YYYY-MM-DD:** Kickoff complete. Environment established.
 ```
+
+---
+
+<a id="demo-plan-idea-to-production"></a>
+## 🚀 Demo Plan: Idea to Production
+
+To observe how the Idea Vault functions in practice, here is an end-to-end walkthrough following a sample project through every stage of development.
+
+<a id="the-concept-logpulse-telemetry-daemon"></a>
+### The Concept: LogPulse Telemetry Daemon
+
+**LogPulse** is a lightweight, zero-dependency background daemon written in Rust that monitors developer workstation latency, Docker CPU footprints, and battery impact, buffering metrics locally in SQLite and streaming them to a personal Grafana instance.
+
+```text
++-------------------------------------------------------------------------------------------------+
+|                                 LOGPULSE REPO MIGRATION PATH                                    |
+|                                                                                                 |
+|  1. Inception       thoughts/2025-01-14-workstation-metric-collector.md                         |
+|          │                                                                                      |
+|          ▼                                                                                      |
+|  2. Exploration     dev-ideas/ebpf-vs-sysinfo-workstation-daemon.md                             |
+|          │                                                                                      |
+|          ▼                                                                                      |
+|  3. Architecture    decisions/0001-use-sqlite-wal-for-metric-buffering.md                       |
+|          │          projects/proposals/logpulse-daemon.md                                       |
+|          ▼                                                                                      |
+|  4. Execution       projects/active/logpulse-daemon.md                                          |
+|          │          plans/2025-q1-logpulse-daemon-mvp.md                                        |
+|          ▼                                                                                      |
+|  5. Archive         projects/archive/logpulse-daemon.md (v1.0 Shipped)                          |
++-------------------------------------------------------------------------------------------------+
+```
+
+<a id="step-by-step-vault-walkthrough"></a>
+### Step-by-Step Vault Walkthrough
+
+#### 1. Inception: Seed
+* **File:** `thoughts/2025-01-14-workstation-metric-collector.md`
+* **Status:** `draft`
+* **Content:** Developer notes battery drain when running 5 nested containers during local builds. Sketches an idea for a 5MB background daemon that samples procfs every 2s.
+
+#### 2. Technical Investigation: Sprout
+* **File:** `dev-ideas/ebpf-vs-sysinfo-workstation-daemon.md`
+* **Status:** `in-review`
+* **Content:** Compares eBPF kernel probes against standard `sysinfo` crates in Rust. Benchmarks reveal `sysinfo` uses <0.2% CPU and requires no root privileges on macOS and Linux.
+
+#### 3. Formal Proposal & Architecture: Sapling
+* **Files:**
+  * `decisions/0001-use-sqlite-wal-for-metric-buffering.md` (`accepted`)
+  * `projects/proposals/logpulse-daemon.md` (`accepted`)
+* **Content:** Comprehensive system spec documenting CLI options (`logpulse start --interval 2s`), SQLite WAL compaction routines, and OpenTelemetry OTLP export format.
+
+#### 4. Active Buildout: Tree
+* **Files:**
+  * Promoted `projects/proposals/logpulse-daemon.md` ➔ `projects/active/logpulse-daemon.md`
+  * Created `plans/2025-q1-logpulse-daemon-mvp.md` (`in-progress`)
+* **Content:** Milestone tracking, commit anchors, and progress checklist.
+
+<a id="sample-execution-milestone-checklist"></a>
+### Sample Execution Milestone Checklist
+
+```markdown
+## Milestone Tracking: LogPulse v1.0 MVP
+Status: 🟡 In Progress | Target Release: 2025-03-31 | Lead: @octo-user
+
+### Sprint 1: Kernel & System Sampling Engine
+- [x] Spike cross-platform `sysinfo` bindings for macOS/Linux (Completed 2025-01-22)
+- [x] Implement RingBuffer for burst metric containment (Completed 2025-01-28)
+- [x] Unit test memory footprint under simulated 100-container stress load (Pass: 4.8MB peak)
+
+### Sprint 2: Local Persistence & SQLite WAL
+- [x] Configure SQLite with `PRAGMA journal_mode=WAL` and `synchronous=NORMAL`
+- [x] Create schema migration for metric time-series table
+- [ ] Implement automated compaction worker for records older than 7 days
+
+### Sprint 3: CLI & Daemon Lifecycle
+- [ ] Implement `clap`-based CLI commands: `logpulse daemon [start|stop|status]`
+- [ ] Configure launchd (macOS) and systemd (Linux) service generators
+- [ ] End-to-end test signal interruption handling (SIGINT / SIGTERM graceful flush)
+
+### Sprint 4: Export Pipeline & v1.0.0 Release
+- [ ] OpenTelemetry protocol (OTLP/gRPC) exporter integration
+- [ ] Build GitHub Actions release matrix (x86_64 and aarch64 binaries)
+- [ ] Publish documentation and release announcement
+```
+
+---
+
+<a id="next-steps--future-enhancements"></a>
+## 🔮 Next Steps & Future Enhancements
+
+To further automate and scale this personal knowledge vault, the following upgrades are slated for implementation:
+
+- [ ] **Automated Frontmatter Linter (GitHub Actions):** Enforce taxonomy standards, date formats, and valid status keys on every Pull Request.
+- [ ] **Dynamic Index Generation Script:** A lightweight script (`scripts/reindex.py` or Node.js CLI) that scans metadata headers to generate an automated table of contents and tag cloud in the README.
+- [ ] **Obsidian / Foam / VS Code Bi-Directional Linking:** Establish standardized wiki-links (`[[note-slug]]`) to visualize connections between ADRs and project specs in interactive graph viewers.
+- [ ] **Semantic Search CLI:** Embed markdown contents using local embeddings (e.g., Chroma or LanceDB) to query historical insights using natural language.
+- [ ] **Automated Graduation Assistant:** A bot that highlights stagnant `draft` ideas older than 60 days to review, graduate, or archive.
+
+---
+
+<a id="repository-hygiene--best-practices"></a>
+## 💡 Repository Hygiene & Best Practices
+
+1. **Atomic Commits:** When moving a project from `proposals/` to `active/`, make it a dedicated commit with a clear commit message: `feat(lifecycle): promote logpulse to active project`.
+2. **Never Delete Abandoned Ideas:** Move them to `projects/archive/` or add a `status: rejected` header with a rationale section. Failed explorations prevent you from repeating the same dead ends in the future.
+3. **Regular Triage Ritual:** Spend 15 minutes every Friday reviewing `thoughts/`—either graduate actionable concepts into `dev-ideas/` or mark them closed.
+4. **Keep Specs Self-Contained:** Strive to include inline diagrams (ASCII or Mermaid) in RFCs so notes remain readable offline or in raw terminal environments.
