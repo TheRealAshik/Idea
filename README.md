@@ -1,21 +1,38 @@
+<div align="center">
+
 # 🧠 Idea Vault & Engineering Logbook
 
-[![Status](https://img.shields.io/badge/status-active-brightgreen.svg)](#) [![License](https://img.shields.io/badge/license-MIT-blue.svg)](#) [![Maintenance](https://img.shields.io/badge/maintained-yes-success.svg)](#) [![Taxonomy](https://img.shields.io/badge/taxonomy-RFC--spec-orange.svg)](#)
+**A friction-free sanctuary designed to capture, organize, and incubate technical concepts, project blueprints, architectural decisions, and day-to-day sparks.**
 
-> A unified, friction-free knowledge vault designed to capture, organize, and incubate technical concepts, project blueprints, architectural decisions, and day-to-day sparks from inception to execution.
+<p align="center">
+  <a href="#"><img src="https://img.shields.io/badge/status-active-success.svg?style=for-the-badge&logo=git&logoColor=white" alt="Status: Active" /></a>
+  <a href="#"><img src="https://img.shields.io/badge/license-MIT-blue.svg?style=for-the-badge&logo=open-source-initiative&logoColor=white" alt="License: MIT" /></a>
+  <a href="#"><img src="https://img.shields.io/badge/last%20commit-rolling-orange.svg?style=for-the-badge&logo=github&logoColor=white" alt="Last Commit" /></a>
+  <a href="#"><img src="https://img.shields.io/badge/docs-structured-purple.svg?style=for-the-badge&logo=markdown&logoColor=white" alt="Documentation" /></a>
+  <a href="#"><img src="https://img.shields.io/badge/taxonomy-RFC--spec-informational.svg?style=for-the-badge&logo=buffer&logoColor=white" alt="Taxonomy" /></a>
+</p>
+
+> *"Great systems begin as transient thoughts. Without disciplined structure and an immutable logbook, breakthroughs scatter to the wind."*
+
+</div>
 
 ---
 
 ## 📑 Table of Contents
 
-- [Vision & Purpose](#-vision--purpose)
-- [Repository Structure](#-repository-structure)
-- [Directory Taxonomy](#-directory-taxonomy)
-- [Naming Conventions](#-naming-conventions)
-- [Tagging & Metadata Rules](#-tagging--metadata-rules)
+- [🎯 Vision & Purpose](#vision-purpose)
+- [🗂️ Repository Structure](#repository-structure)
+- [📚 Directory Taxonomy](#directory-taxonomy)
+- [📐 Naming Conventions](#naming-conventions)
+  - [General Rules](#general-rules)
+  - [Format by Category](#format-by-category)
+- [🏷️ Tagging & Metadata Rules](#tagging--metadata-rules)
+  - [Frontmatter Specification](#frontmatter-specification)
+  - [Status Vocabulary](#status-vocabulary)
 
 ---
 
+<a id="vision-purpose"></a>
 ## 🎯 Vision & Purpose
 
 Great systems begin as transient thoughts. Without deliberate structure, notes scatter across scrapbooks, sticky notes, and lost branches. This repository acts as an immutable external memory and structured incubation chamber:
@@ -26,6 +43,7 @@ Great systems begin as transient thoughts. Without deliberate structure, notes s
 
 ---
 
+<a id="repository-structure"></a>
 ## 🗂️ Repository Structure
 
 ```text
@@ -48,6 +66,7 @@ idea-vault/
 
 ---
 
+<a id="directory-taxonomy"></a>
 ## 📚 Directory Taxonomy
 
 | Directory | Purpose | Graduation Trigger |
@@ -62,14 +81,17 @@ idea-vault/
 
 ---
 
+<a id="naming-conventions"></a>
 ## 📐 Naming Conventions
 
 Standardized file naming guarantees natural alphabetical sorting, easy fuzzy-find search (`Ctrl+P` / `Cmd+P`), and predictable URLs.
 
+<a id="general-rules"></a>
 ### 1. General Rules
 - **Lower kebab-case only:** Use lowercase alphanumeric characters separated by hyphens (`-`). Never use spaces or underscores.
 - **File extension:** Always use `.md` for documentation.
 
+<a id="format-by-category"></a>
 ### 2. Format by Category
 
 - **Projects & Proposals:** `projects/proposals/<topic-slug>.md`
@@ -91,9 +113,13 @@ Standardized file naming guarantees natural alphabetical sorting, easy fuzzy-fin
 
 ---
 
+<a id="tagging--metadata-rules"></a>
 ## 🏷️ Tagging & Metadata Rules
 
 Every file should begin with YAML frontmatter to facilitate indexing, filtering, and static search tools.
+
+<a id="frontmatter-specification"></a>
+### Frontmatter Specification
 
 ```yaml
 ---
@@ -108,6 +134,7 @@ owner: "@octo-user"
 ---
 ```
 
+<a id="status-vocabulary"></a>
 ### Status Vocabulary
 - `draft`: Incomplete concept or brainstorming phase.
 - `in-review`: Ready for peer review or self-audit.
